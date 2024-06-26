@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Web Scraper</title>
+</head>
+<body>
+    <h1>Dynamic Web Scraper</h1>
+    <form method="POST">
+        <label for="urls">Website URLs (comma-separated):</label>
+        <input type="text" id="urls" name="urls" required>
+        <br>
+        <label for="selector">CSS Selector:</label>
+        <input type="text" id="selector" name="selector" required>
+        <br>
+        <button type="submit">Scrape</button>
+    </form>
+
+    {% if data %}
+        {% for url, scraped in data %}
+            <h2>Scraped Data from {{ url }}</h2>
+            {% for item in scraped %}
+                {% if item.startswith('http') %}
+                    <img src="{{ item }}" alt="Scraped Image" style="max-width: 100%;">
+                {% else %}
+                    <p>{{ item }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% if errors %}
+        {% for url, error in errors %}
+            <p style="color: red;">Error scraping {{ url }}: {{ error }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
