@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Recommendations</title>
+  </head>
+  <body>
+    <h1>Recommended Content</h1>
+    <p>{{ recommendations|length }} in search result</p>
+    <ul>
+      {% for recommendation in recommendations %}
+        <li>{{ recommendation }}</li>
+        
+      {% endfor %}
+      
+    </ul>
+    <a href="/">Go back</a>
+  </body>
+</html>
